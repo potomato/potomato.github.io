@@ -9,7 +9,7 @@ interface SolverProps {
 }
 
 interface SolverState {
-    target: number;
+    target: number | null;
     minElems : number;
     maxElems : number;
 };
@@ -28,6 +28,10 @@ export default class Solver extends Component<SolverProps, SolverState> {
                 target: newTarget,
                 minElems : 1,
                 maxElems : 7,
+            });
+        } else {
+            this.setState({
+                target : null,
             });
         }
     }
