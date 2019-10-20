@@ -1,5 +1,6 @@
 import  React, { Component } from "react";
 import Target from "./Target"
+import ElemCount from './ElemCount'
 import getCombinations from './getCombinations'
 import filterCombinations from './filterCombinations'
 
@@ -8,7 +9,7 @@ interface SolverProps {
 }
 
 interface SolverState {
-    target: number | null;
+    target: number;
     minElems : number;
     maxElems : number;
 };
@@ -16,43 +17,42 @@ interface SolverState {
 export default class Solver extends Component<SolverProps, SolverState> {
 
     state: SolverState = {
-        target : null,
+        target : 20,
         minElems : 1,
         maxElems : 7,
     };
 
     setTarget = (newTarget : number | null) => {
-        this.setState({
-            target: newTarget,
-            minElems : 1,
-            maxElems : 7,
-        });
+        if (newTarget) {
+            this.setState({
+                target: newTarget,
+                minElems : 1,
+                maxElems : 7,
+            });
+        }
     }
 
     setMinElems = (minElems : number) => {
         this.setState({
-            minElems : minElems
+            minElems : minElems,
+            maxElems : Math.max(this.state.maxElems, minElems)
         })
     }
 
     setMaxElems = (maxElems : number) => {
         this.setState({
-            maxElems : maxElems
+            maxElems : maxElems,
+            minElems : Math.min(this.state.minElems, maxElems)
         })
     }
 
     render(){
         return(
             <div>
-                <h1>Solver</h1>
-                <Target onChange={this.setTarget}/>
-                <div>
-                    Target now is: {this.state.target}
-                </div>
-                <input type="range" min={1} max={7} value={this.state.minElems.toString()} onChange={(evt) => this.setMinElems(parseInt(evt.target.value))}></input>
-                <div>Min elems: {this.state.minElems}</div>
-                <input type="range" min={1} max={7} value={this.state.maxElems.toString()} onChange={(evt) => this.setMaxElems(parseInt(evt.target.value))}></input>
-                <div>Max elems: {this.state.maxElems}</div>
+                <h1>Sandwich Sudoku Combination Solver</h1>
+                <Target targetValue={this.state.target} onChange={this.setTarget}/>
+                <ElemCount description="Minimum number of elements is" minValue={1} maxValue={7} currentValue={this.state.minElems} onChange={(i) => this.setMinElems(i)} />
+                <ElemCount description="Maximum number of elements is" minValue={1} maxValue={7} currentValue={this.state.maxElems} onChange={(i) => this.setMaxElems(i)} />
                 <div>
                     { this.getResults().map( (comb) => <div>{comb.join(" + ")}</div>) }
                 </div>
@@ -62,11 +62,12 @@ export default class Solver extends Component<SolverProps, SolverState> {
 
     getResults = () : Array<Array<number>> => {
         if (!this.state.target) return [];
-
         let allCombinations = getCombinations(this.state.target);
-
-        let filteredCombinations = filterCombinations(allCombinations, this.state.minElems, this.state.maxElems);
-
-        return filteredCombinations;
+        let filteredCombinations =  filterCombinations(allCombinations, this.state.minElems, this.state.maxElems);
+        let sortedCombinations = filteredCombinations.sort( (a, b) => {
+            if (a.length < b.length) return -1; // shortest first
+            return a.join() < b.join() ? -1 : 1; // otherwise by order of elements
+        } );
+        return sortedCombinations;
     }
 }
