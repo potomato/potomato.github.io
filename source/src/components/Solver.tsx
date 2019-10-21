@@ -3,6 +3,7 @@ import Target from "./Target"
 import ElemCount from './ElemCount'
 import getCombinations from './getCombinations'
 import filterCombinations from './filterCombinations'
+import Results from './Results'
 
 
 interface SolverProps {
@@ -52,14 +53,12 @@ export default class Solver extends Component<SolverProps, SolverState> {
 
     render(){
         return(
-            <div>
+            <div className="Solver">
                 <h1>Sandwich Sudoku Combination Solver</h1>
                 <Target targetValue={this.state.target} onChange={this.setTarget}/>
                 <ElemCount description="Minimum number of elements is" minValue={1} maxValue={7} currentValue={this.state.minElems} onChange={(i) => this.setMinElems(i)} />
                 <ElemCount description="Maximum number of elements is" minValue={1} maxValue={7} currentValue={this.state.maxElems} onChange={(i) => this.setMaxElems(i)} />
-                <div>
-                    { this.getResults().map( (comb) => <div>{comb.join(" + ")}</div>) }
-                </div>
+                <Results combinations={this.getResults()}/>
             </div>
         )
     }
