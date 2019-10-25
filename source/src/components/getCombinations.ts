@@ -8,17 +8,15 @@ export default function getCombinations(target: number) : Array<Array<number>> {
 
 function subsetSum(numbers : Array<number>, target : number, partial : Array<number>, results : Array<Array<number>> ) {
     // sum partial
-    let s = partial.reduce(function (a, b) {
-      return a + b;
-    }, 0);
+    let partialSum = partial.reduce((a, b) => a+b, 0);
   
     // check if the partial sum is equals to target
-    if (s === target) {
-      console.log("%s=%s", partial.join("+"), target)
+    if (partialSum === target) {
+      //console.log("%s=%s", partial.join("+"), target)
       results.push(partial);
     }
   
-    if (s >= target) {
+    if (partialSum >= target) {
       return;  // if we reach the number why bother to continue
     }
   
