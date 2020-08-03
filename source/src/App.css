@@ -1,19 +1,38 @@
- .App {
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  
+}
+
+div.mainRow {
+  margin-bottom: 1em;
+}
+
+div.row {
+  justify-content: center;
+  text-align: center;
+  font-size: calc(10px + 2vmin);
+/*   margin-bottom: 1em;
+   border: 1px solid blue */
+}
+
+div.HideCol {
+  background-color: gray;
+  font-size: 50%;
+}
+
+/*
+.App {
   text-align: center;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   font-size: calc(10px + 2vmin);
-}
-
-div.App div {
-  margin-bottom: 1em;
-}
-
-div.Target span {
-  vertical-align: super;
-}
+}*/
 
 div.Target input {
   border: 1px solid lightgray;
@@ -27,10 +46,6 @@ div.Target input {
   div.Target input {
     padding-right: 20px;
   }
-}
-
-div.ElemCount span {
-  display: block;
 }
 
 div.Results div {

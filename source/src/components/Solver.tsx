@@ -4,6 +4,7 @@ import ElemCount from './ElemCount'
 import getCombinations from './getCombinations'
 import filterCombinations from './filterCombinations'
 import Results from './Results'
+import {Container, Row, Col} from 'react-bootstrap'
 
 
 interface SolverProps {
@@ -53,13 +54,13 @@ export default class Solver extends Component<SolverProps, SolverState> {
 
     render(){
         return(
-            <div className="Solver">
-                <h1>Sandwich Sudoku Combination Solver</h1>
+            <Container className="Solver">
+                <Row className="mainRow"><Col><h1>Sandwich Sudoku Combination Solver</h1></Col></Row>
                 <Target targetValue={this.state.target} onChange={this.setTarget}/>
                 <ElemCount description="Minimum number of elements is" minValue={1} maxValue={7} currentValue={this.state.minElems} onChange={(i) => this.setMinElems(i)} />
                 <ElemCount description="Maximum number of elements is" minValue={1} maxValue={7} currentValue={this.state.maxElems} onChange={(i) => this.setMaxElems(i)} />
                 <Results combinations={this.getResults()}/>
-            </div>
+            </Container>
         )
     }
 

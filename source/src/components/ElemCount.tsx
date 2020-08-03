@@ -1,4 +1,5 @@
 import React from 'react';
+import {Row, Col} from 'react-bootstrap'
 
 interface ElemCountProps {
     description : string,
@@ -10,10 +11,16 @@ interface ElemCountProps {
 
 const ElemCount: React.FC<ElemCountProps> = (props) => {
   return (
-    <div className="ElemCount">
-      <span>{`${props.description} ${props.currentValue}`}</span>
-      <input type="range" min={props.minValue} max={props.maxValue} value={props.currentValue} onChange={(evt) => props.onChange(parseInt(evt.target.value))}></input>
-    </div>
+    <Row className="ElemCount mainRow">
+      <Col>
+        <Row>
+          <span>{`${props.description} ${props.currentValue}`}</span>
+        </Row>
+        <Row>
+          <input type="range" min={props.minValue} max={props.maxValue} value={props.currentValue} onChange={(evt) => props.onChange(parseInt(evt.target.value))}></input>
+        </Row>
+      </Col>
+    </Row>
   );
 }
 

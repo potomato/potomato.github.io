@@ -1,5 +1,6 @@
 import React from 'react';
 import Combination from './Combination'
+import {Row, Col} from 'react-bootstrap'
 
 interface ResultsProps {
     combinations: Array<Array<number>>
@@ -7,9 +8,11 @@ interface ResultsProps {
 
 const Results: React.FC<ResultsProps> = (props) => {
   return (
-    <div className="Results">
+    <Row className="Results mainRow">
+      <Col>
         { props.combinations.map( (comb) => <Combination key={comb.join()} combination={comb} />) }
-    </div>
+      </Col>
+    </Row>
   );
 }
 

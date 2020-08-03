@@ -5,8 +5,6 @@ import Solver from './components/Solver'
 const App: React.FC = () => {
   return (
     <div className="App">
-      <header className="App-header">
-      </header>
       <Solver />
     </div>
   );

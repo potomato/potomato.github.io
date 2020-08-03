@@ -1,4 +1,5 @@
 import React from 'react';
+import {Row, Col} from 'react-bootstrap'
 
 interface TargetProps {
     targetValue : number | null,
@@ -7,10 +8,12 @@ interface TargetProps {
 
 const Target: React.FC<TargetProps> = (props) => {
   return (
-    <div className="Target">
+    <Row className="Target mainRow">
+      <Col>
         <span>Target is </span>
         <input type="number" min={2} max={35} value={props.targetValue || undefined} onChange={(evt) => props.onChange(getIntVal(evt.target.value))}></input>
-    </div>
+        </Col>
+    </Row>
   );
 }
 
